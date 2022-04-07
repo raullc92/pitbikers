@@ -2,8 +2,11 @@ import Head from "next/head"
 import Image from "next/image"
 import Navbar from "../components/presentation/navbar"
 import styles from "../styles/Home.module.css"
+import { Article } from "../components/presentation/article"
 
 export default function Home() {
+  const tags = ["mecanica", "mantenimiento", "circuito", "tag4", "tag5"]
+
   return (
     <div className="bg-base-100">
       <Head>
@@ -32,8 +35,43 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <section>
-        <h2 className="text-6xl text-center font-bold">Artículos</h2>
+      <section className="max-w-5xl m-auto">
+        <h2 className="text-6xl text-center font-bold my-6">Artículos</h2>
+        <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
+          <Article
+            title={"titulo"}
+            description={
+              "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum"
+            }
+            data={"20/05/2021"}
+            tags={tags}
+            likes={12}
+          />
+          <Article
+            title={"titulo"}
+            description="probando"
+            data={"20/05/2021"}
+            tags={tags}
+          />
+          <Article
+            title={"titulo"}
+            description="probando"
+            data={"20/05/2021"}
+            tags={tags}
+          />
+          <Article
+            title={"titulo"}
+            description="probando"
+            data={"20/05/2021"}
+            tags={tags}
+          />
+          <Article
+            title={"titulo"}
+            description="probando"
+            data={"20/05/2021"}
+            tags={tags}
+          />
+        </div>
       </section>
     </div>
   )
