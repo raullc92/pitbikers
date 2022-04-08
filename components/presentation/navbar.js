@@ -33,13 +33,13 @@ const Navbar = () => {
             className="menu dropdown-content shadow bg-base-100 rounded-box w-screen h-auto mx-0"
           >
             <li>
-              <a className="justify-center my-3 py-4 text-3xl">Home</a>
+              <a className="justify-center py-6 text-3xl">Home</a>
             </li>
             <li>
-              <a className="justify-center my-3 py-4 text-3xl">Forum</a>
+              <a className="justify-center py-6 text-3xl">Forum</a>
             </li>
             <li>
-              <a className="justify-center my-3 p-4 text-3xl">Login</a>
+              <a className="justify-center p-6 text-3xl">Login</a>
             </li>
           </ul>
         </div>

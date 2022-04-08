@@ -3,6 +3,7 @@ import Image from "next/image"
 import Navbar from "../components/presentation/navbar"
 import styles from "../styles/Home.module.css"
 import { Article } from "../components/presentation/article"
+import Searcher from "../components/presentation/searcher"
 
 export default function Home() {
   const tags = ["mecanica", "mantenimiento", "circuito", "tag4", "tag5"]
@@ -35,7 +36,10 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <section className="max-w-5xl m-auto">
+      <section>
+        <Searcher />
+      </section>
+      <section className="max-w-5xl m-auto mt-32">
         <h2 className="text-6xl text-center font-bold my-6">Artículos</h2>
         <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
           <Article
