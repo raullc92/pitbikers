@@ -1,7 +1,11 @@
 import Link from "next/link"
 import React from "react"
+import useAuth from "../application/useAuth"
+import UserDropDown from "./navbar/userDropDown"
 
 const Navbar = () => {
+  const { logout, user } = useAuth()
+
   return (
     <div className="navbar backdrop-blur-sm fixed z-10 px-0">
       <div className="flex-1 px-2">
@@ -13,7 +17,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end md:hidden">
         <div className="dropdown dropdown-end px-3">
-          <label tabindex="0" className="btn btn-ghost btn-circle">
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -21,26 +25,47 @@ const Navbar = () => {
               className="inline-block w-5 h-5 stroke-current"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 6h16M4 12h16M4 18h16"
               ></path>
             </svg>
           </label>
           <ul
-            tabindex="0"
+            tabIndex={0}
             className="menu dropdown-content shadow bg-base-100 rounded-box w-screen h-auto mx-0"
           >
-            <li>
-              <a className="justify-center py-6 text-3xl">Home</a>
-            </li>
+            <Link href="/">
+              <li>
+                <a className="justify-center py-6 text-3xl">Home</a>
+              </li>
+            </Link>
             <li>
               <a className="justify-center py-6 text-3xl">Forum</a>
             </li>
-            <li>
-              <a className="justify-center p-6 text-3xl">Login</a>
-            </li>
+            {user ? (
+              <>
+                <Link href="/perfil">
+                  <li>
+                    <a className="justify-center py-6 text-3xl">Perfil</a>
+                  </li>
+                </Link>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="justify-center py-6 text-3xl"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link href="/login">
+                <li>
+                  <a className="justify-center py-6 text-3xl">Login</a>
+                </li>
+              </Link>
+            )}
           </ul>
         </div>
       </div>
@@ -56,34 +81,22 @@ const Navbar = () => {
               <a>Forum</a>
             </Link>
           </li>
-          <li className="mx-4">
-            <Link href="/">
-              <a>Login</a>
-            </Link>
-          </li>
+          {user ? null : (
+            <>
+              <li className="mx-4">
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              </li>
+              <li className="mx-4">
+                <Link href="/signup">
+                  <a>Registrarse</a>
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
-        <div className="dropdown dropdown-end">
-          <label tabindex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://api.lorem.space/image/face?hash=33791" />
-            </div>
-          </label>
-          <ul
-            tabindex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-32"
-          >
-            <li>
-              <Link href="/">
-                <a className="justify-center text-xl">Perfil</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/">
-                <a className="justify-center text-xl">Logout</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
+        {user ? <UserDropDown /> : null}
       </div>
     </div>
   )

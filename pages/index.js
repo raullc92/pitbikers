@@ -2,11 +2,21 @@ import Head from "next/head"
 import Image from "next/image"
 import Navbar from "../components/presentation/navbar"
 import styles from "../styles/Home.module.css"
-import { Article } from "../components/presentation/article"
+import Link from "next/link"
+import { ArticleCard } from "../components/presentation/articleCard"
 import Searcher from "../components/presentation/searcher"
+import { useState, useEffect } from "react"
+import { UseArticles } from "../components/application/useArticles"
 
 export default function Home() {
   const tags = ["mecanica", "mantenimiento", "circuito", "tag4", "tag5"]
+  const { getArticles } = UseArticles()
+  const [articles, setArticles] = useState([])
+  useEffect(() => {
+    if (articles.length === 0) {
+      getArticles().then((articles) => setArticles(articles))
+    }
+  }, [])
 
   return (
     <div className="bg-base-100">
@@ -16,20 +26,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
       <main className={styles.main}>
         <div
-          class="hero min-h-screen"
+          className="hero min-h-screen"
           //style="background-image: url(https://api.lorem.space/image/fashion?w=1000&h=800);"
           style={{
-            "background-image":
-              "url(https://api.lorem.space/image/fashion?w=1000&h=800)",
+            backgroundImage: `url(/vercel.svg)`,
           }}
         >
-          <div class="hero-overlay bg-opacity-60"></div>
-          <div class="hero-content text-center text-neutral-content">
-            <div class="max-w-md">
-              <h1 class="mb-5 text-7xl font-bold italic">
+          <div className="hero-overlay bg-opacity-60"></div>
+          <div className="hero-content text-center text-neutral-content">
+            <div className="max-w-md">
+              <h1 className="mb-5 text-7xl font-bold italic">
                 PITBIKE<span className="font-thin">RS</span>
               </h1>
             </div>
@@ -42,39 +50,24 @@ export default function Home() {
       <section className="max-w-5xl m-auto mt-32">
         <h2 className="text-6xl text-center font-bold my-6">Artículos</h2>
         <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
-          <Article
-            title={"titulo"}
-            description={
-              "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum"
-            }
-            data={"20/05/2021"}
-            tags={tags}
-            likes={12}
-          />
-          <Article
-            title={"titulo"}
-            description="probando"
-            data={"20/05/2021"}
-            tags={tags}
-          />
-          <Article
-            title={"titulo"}
-            description="probando"
-            data={"20/05/2021"}
-            tags={tags}
-          />
-          <Article
-            title={"titulo"}
-            description="probando"
-            data={"20/05/2021"}
-            tags={tags}
-          />
-          <Article
-            title={"titulo"}
-            description="probando"
-            data={"20/05/2021"}
-            tags={tags}
-          />
+          {articles.map((article) => {
+            let slug = article.title.replaceAll(" ", "-")
+            return (
+              <Link href={`/articulo/${slug}`} key={article.id}>
+                <a>
+                  <ArticleCard
+                    title={article.title}
+                    tags={article.tags}
+                    description={article.description}
+                    likes={article.likes.count}
+                    date={article.date}
+                    key={article.id}
+                    image={article.url}
+                  />
+                </a>
+              </Link>
+            )
+          })}
         </div>
       </section>
     </div>
