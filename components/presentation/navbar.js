@@ -41,9 +41,11 @@ const Navbar = () => {
                 <a className="justify-center py-6 text-3xl">Home</a>
               </li>
             </Link>
-            <li>
-              <a className="justify-center py-6 text-3xl">Forum</a>
-            </li>
+            <Link href="/foro">
+              <li>
+                <a className="justify-center py-6 text-3xl">Foro</a>
+              </li>
+            </Link>
             {user ? (
               <>
                 <Link href="/perfil">
@@ -77,8 +79,8 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="mx-4">
-            <Link href="/">
-              <a>Forum</a>
+            <Link href="/foro">
+              <a>Foro</a>
             </Link>
           </li>
           {user ? null : (
