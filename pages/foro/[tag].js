@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { useThreats } from "../../components/application/useThreats"
 import { firestoreTagService } from "../../components/infrastructure/firestoreTagService"
 import ThreatCard from "../../components/presentation/threatCard"
 
@@ -34,7 +35,9 @@ const Tag = ({ results, tag }) => {
 
 export async function getServerSideProps({ params }) {
   const tag = params.tag
-  const { getThreats } = firestoreTagService()
+  // const { getThreats } = firestoreTagService()
+  // const threats = await getThreats(tag)
+  const { getThreats } = useThreats()
   const threats = await getThreats(tag)
   const results = JSON.parse(JSON.stringify(threats))
   return { props: { results, tag } }

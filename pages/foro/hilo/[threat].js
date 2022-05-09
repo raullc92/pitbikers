@@ -1,4 +1,5 @@
 import React from "react"
+import { useThreats } from "../../../components/application/useThreats"
 import { firestoreTagService } from "../../../components/infrastructure/firestoreTagService"
 import Message from "../../../components/presentation/message"
 
@@ -35,7 +36,9 @@ const Threat = ({ results }) => {
 export async function getServerSideProps({ params }) {
   const query = params.threat
   const [tag, id] = query.split("-")
-  const { getThreatById } = firestoreTagService()
+  // const { getThreatById } = firestoreTagService()
+  // const threats = await getThreatById(tag, id)
+  const {getThreatById} = useThreats()
   const threats = await getThreatById(tag, id)
   const results = JSON.parse(JSON.stringify(threats))
   return { props: { results } }

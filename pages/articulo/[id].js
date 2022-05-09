@@ -117,7 +117,9 @@ export async function getStaticPaths() {
   const articles = await UseArticles().getArticles()
 
   const paths = articles.map((article) => {
-    let titleWithOutSpaces = article.title.replaceAll(" ", "-")
+    // problem with modern browsers
+    //let titleWithOutSpaces = article.title.replaceAll(" ", "-")
+    let titleWithOutSpaces = article.title.replace(/ /g, '-')
     return {
       params: { id: titleWithOutSpaces },
     }
@@ -126,7 +128,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const title = params.id.replaceAll("-", " ")
+  //problem with modern browsers
+  //const title = params.id.replaceAll("-", " ")
+  const title = params.id.replace(/-/g, " ")
   console.log(title)
   const article = await UseArticles().getArticleByName(title)
 
