@@ -23,7 +23,7 @@ const Threat = ({ results, tagName }) => {
   }
 
   useEffect(() => {
-    if (likes.users.includes(userAuth?.user.uid)) {
+    if (likes.users.includes(userAuth?.user?.uid)) {
       setLikeFalse("vs_pressed")
     } else {
       setLikeFalse("vs_press")
@@ -40,11 +40,9 @@ const Threat = ({ results, tagName }) => {
   const handleClick = async () => {
     if (likeFalse === "vs_pressed") {
       await decreaseVote(tagName, id, userAuth.user?.uid)
-      //await decreaseVote(articleId, user?.uid)
       setLikeFalse("vs_press")
       likes.count--
     } else {
-      //await increaseVote(articleId, user?.uid)
       await increaseVote(tagName, id, userAuth.user?.uid)
       setLikeFalse("vs_pressed")
       likes.count++

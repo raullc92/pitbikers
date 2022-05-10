@@ -32,8 +32,15 @@ export function formArticle() {
   })
 }
 
-export function formMessage(){
+export function formMessage() {
   return Yup.object().shape({
-    text: Yup.string().required("El campo del mensaje está vacío")
+    text: Yup.string().required("El campo del mensaje está vacío"),
+  })
+}
+
+export function formThreat() {
+  return Yup.object().shape({
+    title: Yup.string().required("El título es requerido"),
+    description: Yup.string().required("La descrición es requerida"),
   })
 }

@@ -23,7 +23,7 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
           <p className="text-2xl font-bold py-3 text-white">{user}</p>
           <p>{description}</p>
           <div className="flex items-center justify-between mt-8">
-            <p className="text-lg font-thin">{parseDate}</p>
+            <p className="text-lg font-thin">{date}</p>
             <div className="card-actions justify-end my-1 px-4 text-success font-bold text-2xl items-center">
               {likes.count} <Image src="/icons/vs.png" width={24} height={24} />
             </div>
