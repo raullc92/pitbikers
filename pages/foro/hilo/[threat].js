@@ -44,6 +44,8 @@ const Threat = ({ results, tagName }) => {
                   date={message.date}
                   user={message.user}
                   color={owner}
+                  tag={tagName}
+                  id={id}
                 />
               )
             })}

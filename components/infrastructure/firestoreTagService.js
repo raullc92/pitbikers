@@ -11,6 +11,7 @@ import {
   updateDoc,
   addDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import app from "./firebaseApp"
@@ -46,5 +47,10 @@ export function firestoreTagService() {
     await updateDoc(threatRef, { messages: arrayUnion(message)})
   }
 
-  return { getThreats, getThreatById, newMessage }
+  const deleteMessage = async (message, tag, id) => {
+    const threatRef = doc(firestore, `${tag}/${id}`)
+    await updateDoc(threatRef, { messages: arrayRemove(message)})
+  }
+
+  return { getThreats, getThreatById, newMessage, deleteMessage }
 }

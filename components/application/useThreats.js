@@ -16,13 +16,17 @@ export function useThreats(){
         let newMessage = {
             user,
             text,
-            date: Timestamp.fromDate(new Date())
+            date: new Date().toLocaleString()
+            //date: Timestamp.fromDate(new Date())
         }
         await firestoreTagService().newMessage(newMessage, tag, id)
+    }
 
+    const deleteMessage = async (message, tag, id) => {
+        await firestoreTagService().deleteMessage(message, tag, id)
     }
 
     return {
-        getThreats, getThreatById, newAnswer
+        getThreats, getThreatById, newAnswer, deleteMessage
     }
 }
