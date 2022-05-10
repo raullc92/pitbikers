@@ -31,12 +31,11 @@ const Message = ({ user, text, date, color, tag, id }) => {
     const msg = {
       text,
       user,
-      date
+      date,
     }
     await deleteMessage(msg, tag, id)
     router.reload()
   }
-
 
   return (
     <div className="my-16 max-w-xs m-auto md:max-w-4xl md:mx-10">
@@ -44,10 +43,26 @@ const Message = ({ user, text, date, color, tag, id }) => {
         className={`text-3xl font-bold ${background.color} ${background.opacity} py-2 pl-4 rounded-t-lg text-white flex justify-between items-center`}
       >
         {user}
-        { isAdmin && (
-        <button class="btn btn-circle btn-error btn-md mr-4" onClick={handleClick}>
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-</button>
+        {isAdmin && (
+          <button
+            class="btn btn-circle btn-error btn-md mr-4"
+            onClick={handleClick}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         )}
       </header>
       <div className="bg-white bg-opacity-5 py-2 px-4 text-xl rounded-b-lg">

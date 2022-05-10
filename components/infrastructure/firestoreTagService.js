@@ -44,13 +44,42 @@ export function firestoreTagService() {
 
   const newMessage = async (message, tag, id) => {
     const threatRef = doc(firestore, `${tag}/${id}`)
-    await updateDoc(threatRef, { messages: arrayUnion(message)})
+    await updateDoc(threatRef, { messages: arrayUnion(message) })
   }
 
   const deleteMessage = async (message, tag, id) => {
     const threatRef = doc(firestore, `${tag}/${id}`)
-    await updateDoc(threatRef, { messages: arrayRemove(message)})
+    await updateDoc(threatRef, { messages: arrayRemove(message) })
   }
 
-  return { getThreats, getThreatById, newMessage, deleteMessage }
+  const increaseVote = async (tag, id, userId) => {
+    const threatRef = doc(firestore, `${tag}/${id}`)
+    const threat = await getDoc(threatRef)
+    const { likes } = threat.data()
+    const newLikes = {
+      count: likes.count + 1,
+      users: [...likes.users, userId],
+    }
+    await updateDoc(threatRef, { likes: newLikes })
+  }
+
+  const decreaseVote = async (tag, id, userId) => {
+    const threatRef = doc(firestore, `${tag}/${id}`)
+    const threat = await getDoc(threatRef)
+    const { likes } = threat.data()
+    const newLikes = {
+      count: likes.count - 1,
+      users: likes.users.filter((user) => user !== userId),
+    }
+    await updateDoc(threatRef, { likes: newLikes })
+  }
+
+  return {
+    getThreats,
+    getThreatById,
+    newMessage,
+    deleteMessage,
+    increaseVote,
+    decreaseVote,
+  }
 }
