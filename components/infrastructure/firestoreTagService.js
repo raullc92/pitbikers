@@ -78,6 +78,12 @@ export function firestoreTagService() {
     const tagRef = collection(firestore, tag)
     await addDoc(tagRef, newThreat)
   }
+
+  const deleteThreat = async (tag, id) => {
+    const threatRef = doc(firestore, `${tag}/${id}`)
+    await deleteDoc(threatRef)
+  }
+
   return {
     getThreats,
     getThreatById,
@@ -86,5 +92,6 @@ export function firestoreTagService() {
     increaseVote,
     decreaseVote,
     newThreat,
+    deleteThreat,
   }
 }

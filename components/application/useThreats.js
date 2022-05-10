@@ -49,6 +49,10 @@ export function useThreats() {
     await firestoreTagService().newThreat(newThreat, tag)
   }
 
+  const deleteThreat = async (tag, id) => {
+    await firestoreTagService().deleteThreat(tag, id)
+  }
+
   return {
     getThreats,
     getThreatById,
@@ -57,5 +61,6 @@ export function useThreats() {
     increaseVote,
     decreaseVote,
     newThreat,
+    deleteThreat,
   }
 }
