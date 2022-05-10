@@ -31,3 +31,9 @@ export function formArticle() {
     image: Yup.mixed(),
   })
 }
+
+export function formMessage(){
+  return Yup.object().shape({
+    text: Yup.string().required("El campo del mensaje está vacío")
+  })
+}
