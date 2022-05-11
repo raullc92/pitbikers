@@ -3,13 +3,14 @@ import { genericData } from "../application/genericData"
 import { useSearch } from "../application/useSearch"
 import Link from "next/link"
 import { ArticleCard } from "./articleCard"
+import ThreatCard from "./threatCard"
 
 const Searcher = ({ searchType }) => {
   const [search, setSearch] = useState("")
   const [checks, setChecks] = useState({})
-  const [searchedResults, setSearchedResults] = useState([])
+  const [searchedResults, setSearchedResults] = useState(null)
 
-  const { searchArticles } = useSearch()
+  const { searchArticles, searchThreats } = useSearch()
 
   useEffect(() => {
     let tags = {}
@@ -49,8 +50,11 @@ const Searcher = ({ searchType }) => {
       console.log("searching articles")
       results = await searchArticles(search, tagsChecked)
     }
+    if (searchType === "threat") {
+      console.log("searching threats")
+      results = await searchThreats(search, tagsChecked)
+    }
     setSearchedResults(results)
-    console.log(results)
   }
 
   return (
@@ -94,29 +98,52 @@ const Searcher = ({ searchType }) => {
       </form>
       {searchType === "article" && (
         <section className="max-w-5xl m-auto mt-6">
-          <h2 className="text-4xl text-center font-bold my-6">
-            Artículos encontrados: {searchedResults.length}
-          </h2>
+          {searchedResults != null && (
+            <h2 className="text-4xl text-center font-bold my-6">
+              Artículos encontrados: {searchedResults.length}
+            </h2>
+          )}
           <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
-            {searchedResults.map((article) => {
-              let slug = article.title.replaceAll(" ", "-")
-              return (
-                <Link href={`/articulo/${slug}`} key={article.id}>
-                  <a>
-                    <ArticleCard
-                      title={article.title}
-                      tags={article.tags}
-                      description={article.description}
-                      likes={article.likes.count}
-                      date={article.date}
-                      key={article.id}
-                      image={article.url}
-                    />
-                  </a>
-                </Link>
-              )
-            })}
+            {searchedResults != null &&
+              searchedResults.map((article) => {
+                let slug = article.title.replaceAll(" ", "-")
+                return (
+                  <Link href={`/articulo/${slug}`} key={article.id}>
+                    <a>
+                      <ArticleCard
+                        title={article.title}
+                        tags={article.tags}
+                        description={article.description}
+                        likes={article.likes.count}
+                        date={article.date}
+                        key={article.id}
+                        image={article.url}
+                      />
+                    </a>
+                  </Link>
+                )
+              })}
           </div>
+        </section>
+      )}
+      {searchType === "threat" && searchedResults != null && (
+        <section>
+          <h2 className="text-4xl text-center font-bold my-6">
+            Hilos encontrados: {searchedResults.length}
+          </h2>
+          {searchedResults != null &&
+            searchedResults.map((threat) => (
+              <ThreatCard
+                key={threat.id}
+                title={threat.title}
+                user={threat.user}
+                description={threat.description}
+                date={threat.date}
+                likes={threat.likes}
+                id={threat.id}
+                tag={threat.tag}
+              />
+            ))}
         </section>
       )}
     </>

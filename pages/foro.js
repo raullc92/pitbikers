@@ -26,10 +26,11 @@ const Foro = () => {
 
       <main>
         <section>
-          <Searcher />
+          <Searcher searchType="threat" />
         </section>
 
         <section className="">
+          <h2 className="text-6xl text-center font-bold my-6">Tags</h2>
           {tags &&
             tags.map((tag, id) => (
               <TagCard

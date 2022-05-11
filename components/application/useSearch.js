@@ -1,7 +1,9 @@
 import { UseArticles } from "./useArticles"
+import { useThreats } from "./useThreats"
 
 export function useSearch() {
   const { getArticles } = UseArticles()
+  const { getThreats } = useThreats()
 
   const searchArticles = async (text, tags) => {
     let articles = await getArticles()
@@ -37,9 +39,35 @@ export function useSearch() {
     return foundArticles
   }
 
+  const searchThreats = async (text, tags) => {
+    let threats = await Promise.all(
+      tags.map(async (tag) => {
+        const document = "tag" + tag
+        const threatsByTag = await getThreats(document)
+        const threatsWithTag = threatsByTag.map((threat) => {
+          return {
+            ...threat,
+            tag: document,
+          }
+        })
+        return threatsWithTag
+      })
+    )
+    let flatThreats = threats.flat()
+    if (text.length > 0) {
+      const words = text.toLowerCase().split(" ")
+      flatThreats = flatThreats.filter((threat) => {
+        const title = threat.title.toLowerCase()
+        return words.some((word) => title.includes(word))
+      })
+    }
+    return flatThreats
+  }
+
   return {
     searchArticlesByTitle,
     searchArticlesByTags,
     searchArticles,
+    searchThreats,
   }
 }
