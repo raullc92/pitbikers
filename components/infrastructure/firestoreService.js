@@ -39,6 +39,23 @@ export const firestoreService = {
     const result = await deleteDoc(docRef)
   },
 
+  getUsers: async () => {
+    const firestore = getFirestore(app)
+    const collectionRef = collection(firestore, "users")
+    const docSnap = await getDocs(collectionRef)
+    const users = []
+    docSnap.forEach((doc) => {
+      users.push(doc.data())
+    })
+    return users
+  },
+
+  updateUserRole: async (uid, role) => {
+    const firestore = getFirestore(app)
+    const docRef = doc(firestore, `users/${uid}`)
+    await updateDoc(docRef, { role: role })
+  },
+
   getArticles: async () => {
     const firestore = getFirestore(app)
     const querySnapshot = await getDocs(collection(firestore, "articles"))

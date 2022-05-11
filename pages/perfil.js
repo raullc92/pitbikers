@@ -3,10 +3,22 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import useAuth from "../components/application/useAuth"
 import Link from "next/link"
+import AdminUsers from "../components/presentation/adminUsers"
 
 export default function Perfil() {
   const { user, deleteUser } = useAuth()
+  const [users, setUsers] = useState([])
+  const { getUsers } = useUsers()
   const router = useRouter()
+
+  useEffect(() => {
+    if (user?.role === "admin") {
+      getUsers().then((users) => {
+        setUsers(users)
+      })
+    }
+    console.log(users)
+  }, [user])
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -16,7 +28,7 @@ export default function Perfil() {
 
   return (
     <>
-      <main className="flex w-screen h-screen flex-col justify-center max-w-xs m-auto md:max-w-lg">
+      <main className="flex w-screen h-screen flex-col max-w-xs m-auto md:max-w-lg">
         {user ? (
           <>
             <h1 className="text-6xl  font-bold my-20 text-center">
@@ -47,7 +59,7 @@ export default function Perfil() {
             </Link>
             <label
               htmlFor="my-modal-4"
-              className="btn btn-error modal-button mt-16"
+              className="btn btn-error modal-button my-3"
             >
               Eliminar cuenta
             </label>
@@ -71,6 +83,7 @@ export default function Perfil() {
             Primero debes logearte
           </h1>
         )}
+        {user?.role === "admin" && <AdminUsers />}
       </main>
     </>
   )
