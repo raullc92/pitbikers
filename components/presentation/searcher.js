@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { genericData } from "../application/genericData"
+import { useSearch } from "../application/useSearch"
 
 const Searcher = () => {
   const [search, setSearch] = useState("")
   const [checks, setChecks] = useState({})
+
+  const { searchArticlesByTitle, searchArticlesByTags, searchArticles } =
+    useSearch()
 
   useEffect(() => {
     let tags = {}
@@ -31,11 +35,15 @@ const Searcher = () => {
     setSearch(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     let tags = Object.keys(checks)
     let tagsChecked = tags.filter((tag) => checks[tag].value)
-    console.log(search, tagsChecked)
+    if (!search && !tagsChecked.length) {
+      return
+    }
+    const results = await searchArticles(search, tagsChecked)
+    console.log(results)
   }
 
   return (
