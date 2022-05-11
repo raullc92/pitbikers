@@ -45,7 +45,7 @@ export default function Home() {
         </div>
       </main>
       <section>
-        <Searcher />
+        <Searcher searchType="article" />
       </section>
       <section className="max-w-5xl m-auto mt-32">
         <h2 className="text-6xl text-center font-bold my-6">Artículos</h2>

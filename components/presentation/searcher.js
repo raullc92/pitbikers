@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react"
 import { genericData } from "../application/genericData"
 import { useSearch } from "../application/useSearch"
+import Link from "next/link"
+import { ArticleCard } from "./articleCard"
 
-const Searcher = () => {
+const Searcher = ({ searchType }) => {
   const [search, setSearch] = useState("")
   const [checks, setChecks] = useState({})
+  const [searchedResults, setSearchedResults] = useState([])
 
-  const { searchArticlesByTitle, searchArticlesByTags, searchArticles } =
-    useSearch()
+  const { searchArticles } = useSearch()
 
   useEffect(() => {
     let tags = {}
@@ -42,48 +44,82 @@ const Searcher = () => {
     if (!search && !tagsChecked.length) {
       return
     }
-    const results = await searchArticles(search, tagsChecked)
+    let results = []
+    if (searchType === "article") {
+      console.log("searching articles")
+      results = await searchArticles(search, tagsChecked)
+    }
+    setSearchedResults(results)
     console.log(results)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-control flex max-w-xs m-auto md:max-w-xl">
-        <input
-          type="text"
-          placeholder="Qué estás buscando?"
-          className="input w-full my-4 max-w-xs m-auto bg-slate-600 opacity-50 text-white focus:outline-0 md:max-w-xl"
-          value={search}
-          onChange={handleChangeSearch}
-        />
-        <div className="md:flex md:max-w-xl flex-wrap gap-2">
-          {checks &&
-            Object.keys(checks).map((key, index) => {
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className="form-control flex max-w-xs m-auto md:max-w-xl">
+          <input
+            type="text"
+            placeholder="Qué estás buscando?"
+            className="input w-full my-4 max-w-xs m-auto bg-slate-600 opacity-50 text-white focus:outline-0 md:max-w-xl"
+            value={search}
+            onChange={handleChangeSearch}
+          />
+          <div className="md:flex md:max-w-xl flex-wrap gap-2">
+            {checks &&
+              Object.keys(checks).map((key, index) => {
+                return (
+                  <label
+                    className="cursor-pointer label w-auto justify-start md:mr-8"
+                    key={key}
+                  >
+                    <input
+                      key={`${key}-${index}`}
+                      value={key}
+                      type="checkbox"
+                      checked={key.isChecked}
+                      className="checkbox checkbox-accent mr-2"
+                      onChange={handleChangeChecks}
+                    />
+                    <span className="label-text">{key}</span>
+                  </label>
+                )
+              })}
+          </div>
+          <input
+            type="submit"
+            value="Buscar"
+            className="btn btn-primary px-20 flex max-w-xs m-auto mt-6"
+          />
+        </div>
+      </form>
+      {searchType === "article" && (
+        <section className="max-w-5xl m-auto mt-6">
+          <h2 className="text-4xl text-center font-bold my-6">
+            Artículos encontrados: {searchedResults.length}
+          </h2>
+          <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
+            {searchedResults.map((article) => {
+              let slug = article.title.replaceAll(" ", "-")
               return (
-                <label
-                  className="cursor-pointer label w-auto justify-start md:mr-8"
-                  key={key}
-                >
-                  <input
-                    key={`${key}-${index}`}
-                    value={key}
-                    type="checkbox"
-                    checked={key.isChecked}
-                    className="checkbox checkbox-accent mr-2"
-                    onChange={handleChangeChecks}
-                  />
-                  <span className="label-text">{key}</span>
-                </label>
+                <Link href={`/articulo/${slug}`} key={article.id}>
+                  <a>
+                    <ArticleCard
+                      title={article.title}
+                      tags={article.tags}
+                      description={article.description}
+                      likes={article.likes.count}
+                      date={article.date}
+                      key={article.id}
+                      image={article.url}
+                    />
+                  </a>
+                </Link>
               )
             })}
-        </div>
-        <input
-          type="submit"
-          value="Buscar"
-          className="btn btn-primary px-20 flex max-w-xs m-auto mt-6"
-        />
-      </div>
-    </form>
+          </div>
+        </section>
+      )}
+    </>
   )
 }
 
