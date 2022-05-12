@@ -33,7 +33,7 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
           {title}
           {isAdmin && (
             <button
-              class="btn btn-circle btn-error btn-md mr-4"
+              className="btn btn-circle btn-error btn-md mr-4"
               onClick={handleClick}
             >
               <svg
@@ -44,9 +44,9 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>

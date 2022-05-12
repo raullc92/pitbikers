@@ -75,7 +75,7 @@ const Threat = ({ results, tagName }) => {
               let owner = message.user == user
               return (
                 <Message
-                  key={message.date.seconds}
+                  key={`${message.date}-${message.user}`}
                   text={message.text}
                   date={message.date}
                   user={message.user}
