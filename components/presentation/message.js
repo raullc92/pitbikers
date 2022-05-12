@@ -5,7 +5,7 @@ import { useThreats } from "../application/useThreats"
 import { useRouter } from "next/router"
 import { forumPermission } from "../application/usePermissions"
 
-const Message = ({ user, text, date, color, tag, id }) => {
+const Message = ({ user, text, date, color, tag, id, mainMessage }) => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [background, setBackground] = useState({
     color: "bg-white",
@@ -44,7 +44,7 @@ const Message = ({ user, text, date, color, tag, id }) => {
         className={`text-3xl font-bold ${background.color} ${background.opacity} py-2 pl-4 rounded-t-lg text-white flex justify-between items-center`}
       >
         {user}
-        {isAdmin && (
+        {isAdmin && !mainMessage && (
           <button
             class="btn btn-circle btn-error btn-md mr-4"
             onClick={handleClick}

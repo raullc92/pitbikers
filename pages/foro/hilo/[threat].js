@@ -63,7 +63,13 @@ const Threat = ({ results, tagName }) => {
           </div>
         )}
         <section>
-          <Message user={user} text={description} date={date} color={true} />
+          <Message
+            user={user}
+            text={description}
+            date={date}
+            color={true}
+            mainMessage={true}
+          />
           {messages &&
             messages.map((message) => {
               let owner = message.user == user
@@ -76,6 +82,7 @@ const Threat = ({ results, tagName }) => {
                   color={owner}
                   tag={tagName}
                   id={id}
+                  mainMessage={false}
                 />
               )
             })}
