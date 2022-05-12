@@ -12,9 +12,16 @@ import {
   updateDoc,
   addDoc,
 } from "firebase/firestore"
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage"
 import app from "./firebaseApp"
 import { articlePermission } from "../application/usePermissions"
+import { timestampToDate } from "../application/parseDates"
 
 export const firestoreService = {
   newUser: async (uid, newUser) => {
@@ -63,7 +70,8 @@ export const firestoreService = {
     const articles = []
     querySnapshot.forEach((doc) => {
       let { date, ...data } = doc.data()
-      articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
+      // articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
+      articles.push({ id: doc.id, date: timestampToDate(date), ...data })
     })
     return articles
   },
@@ -78,7 +86,8 @@ export const firestoreService = {
     const articles = []
     querySnapshot.forEach((doc) => {
       let { date, ...data } = doc.data()
-      articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
+      // articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
+      articles.push({ id: doc.id, date: timestampToDate(date), ...data })
     })
     return articles[0]
   },
@@ -87,20 +96,13 @@ export const firestoreService = {
     const storage = getStorage(app)
     const imageRef = ref(storage, image.name)
     const storageRef = ref(storage, `images/${image.name}`)
-    const url = uploadBytes(storageRef, image).then(async (snapshopt) => {
-      const result = await getDownloadURL(snapshopt.ref)
-      return result
-    })
-    return url
+    const snapshopt = await uploadBytes(storageRef, image)
+    const url = await getDownloadURL(snapshopt.ref)
+    return { url, imageName: image.name }
   },
 
   createArticle: async (article) => {
     const firestore = getFirestore(app)
-    // const docRef = doc(firestore, `articles/${article.title}`)
-    // const docSnap = await getDoc(docRef)
-    // if (!docSnap.exists()) {
-    //   setDoc(docRef, article)
-    // }
     const docRef = await addDoc(collection(firestore, "articles"), article)
   },
 
@@ -130,15 +132,15 @@ export const firestoreService = {
     await updateDoc(docRef, { likes: newLikes })
   },
 
-  deleteArticle: async (articleId, uid) => {
+  deleteArticle: async (articleId, uid, imageName) => {
     const firestore = getFirestore(app)
+    const storage = getStorage(app)
     const user = await firestoreService.getUser(uid)
     if (articlePermission(user?.role)) {
       const docRef = doc(firestore, `articles/${articleId}`)
       await deleteDoc(docRef)
-      return true
-    } else {
-      return false
+      const imageRef = ref(storage, `images/${imageName}`)
+      await deleteObject(imageRef)
     }
   },
 }

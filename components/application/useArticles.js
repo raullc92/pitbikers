@@ -1,6 +1,7 @@
 import { Timestamp } from "firebase/firestore"
 import React from "react"
 import { firestoreService } from "../infrastructure/firestoreService"
+import { timestampToDate } from "./parseDates"
 
 export function UseArticles() {
   const getArticles = async () => {
@@ -14,12 +15,14 @@ export function UseArticles() {
   }
 
   const createArticle = async (article, image) => {
-    const url = await firestoreService.addImage(image)
+    const result = await firestoreService.addImage(image)
+    const { url, imageName } = result
     const newArticle = {
       title: article.title,
       description: article.description,
       tags: article.tags,
       url,
+      imageName,
       date: Timestamp.fromDate(new Date()),
       likes: {
         count: 0,
@@ -37,8 +40,8 @@ export function UseArticles() {
     await firestoreService.decreaseVote(articleId, uid)
   }
 
-  const deleteArticle = async (articleId, uid) => {
-    await firestoreService.deleteArticle(articleId, uid)
+  const deleteArticle = async (articleId, uid, imageName) => {
+    await firestoreService.deleteArticle(articleId, uid, imageName)
   }
 
   return {

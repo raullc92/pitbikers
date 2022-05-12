@@ -5,12 +5,23 @@ import useAuth from "../../components/application/useAuth"
 import { useRouter } from "next/router"
 import { genericData } from "../../components/application/genericData"
 import { articlePermission } from "../../components/application/usePermissions"
+import { timestampToDate } from "../../components/application/parseDates"
 
-const Article = ({ title, description, url, date, tags, likes, articleId }) => {
+const Article = ({
+  title,
+  description,
+  url,
+  date,
+  tags,
+  likes,
+  articleId,
+  imageName,
+}) => {
   const [likeFalse, setLikeFalse] = useState("")
   const { user } = useAuth()
   const { increaseVote, decreaseVote } = UseArticles()
   const router = useRouter()
+  console.log(date)
 
   useEffect(() => {
     if (likes.users.includes(user?.uid)) {
@@ -22,7 +33,7 @@ const Article = ({ title, description, url, date, tags, likes, articleId }) => {
 
   const handleDelete = async () => {
     if (articlePermission(user?.role)) {
-      await UseArticles().deleteArticle(articleId, user?.uid)
+      await UseArticles().deleteArticle(articleId, user?.uid, imageName)
       router.push("/")
     }
   }
@@ -129,7 +140,6 @@ export async function getStaticProps({ params }) {
   //problem with modern browsers
   //const title = params.id.replaceAll("-", " ")
   const title = params.id.replace(/-/g, " ")
-  console.log(title)
   const article = await UseArticles().getArticleByName(title)
 
   return {
@@ -137,7 +147,8 @@ export async function getStaticProps({ params }) {
       title: article.title,
       description: article.description,
       url: article?.url ?? null,
-      date: article?.date,
+      imageName: article?.imageName ?? null,
+      date: article?.date ?? null,
       tags: article?.tags ?? null,
       likes: article?.likes ?? null,
       articleId: article?.id,

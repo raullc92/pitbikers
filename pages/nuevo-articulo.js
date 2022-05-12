@@ -23,15 +23,8 @@ export default function Login() {
   }
 
   const handleSubmit = async (values) => {
-    console.log(values)
-    console.log(image)
     await createArticle(values, image)
     router.push("/")
-
-    // setFirebaseError(false)
-    // const { email, password } = values
-    // const { errorUpdate } = await loginWithEmailPassword(email, password)
-    // errorUpdate ? setFirebaseError(true) : null
   }
 
   return (
@@ -69,8 +62,11 @@ export default function Login() {
               aria-labelledby="checkbox-group"
               className="max-w-xs"
             >
-              {articleTags.map((tag) => (
-                <label className="label cursor-pointer justify-start mx-2">
+              {articleTags.map((tag, index) => (
+                <label
+                  className="label cursor-pointer justify-start mx-2"
+                  key={`${index}-${tag}`}
+                >
                   <Field
                     type="checkbox"
                     name="tags"
