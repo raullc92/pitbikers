@@ -3,6 +3,7 @@ import { timestampToDate } from "../application/parseDates"
 import useAuth from "../application/useAuth"
 import { useThreats } from "../application/useThreats"
 import { useRouter } from "next/router"
+import { forumPermission } from "../application/usePermissions"
 
 const Message = ({ user, text, date, color, tag, id }) => {
   const [isAdmin, setIsAdmin] = useState(false)
@@ -21,7 +22,7 @@ const Message = ({ user, text, date, color, tag, id }) => {
         opacity: "bg-opacity-100",
       })
     }
-    if (userAuth.user?.role == "admin") {
+    if (forumPermission(userAuth.user?.role)) {
       setIsAdmin(true)
     }
   }, [userAuth])

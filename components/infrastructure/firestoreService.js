@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import app from "./firebaseApp"
+import { articlePermission } from "../application/usePermissions"
 
 export const firestoreService = {
   newUser: async (uid, newUser) => {
@@ -132,7 +133,7 @@ export const firestoreService = {
   deleteArticle: async (articleId, uid) => {
     const firestore = getFirestore(app)
     const user = await firestoreService.getUser(uid)
-    if (user.role === "admin") {
+    if (articlePermission(user?.role)) {
       const docRef = doc(firestore, `articles/${articleId}`)
       await deleteDoc(docRef)
       return true

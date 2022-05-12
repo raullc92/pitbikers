@@ -4,6 +4,7 @@ import { UseArticles } from "../../components/application/useArticles"
 import useAuth from "../../components/application/useAuth"
 import { useRouter } from "next/router"
 import { genericData } from "../../components/application/genericData"
+import { articlePermission } from "../../components/application/usePermissions"
 
 const Article = ({ title, description, url, date, tags, likes, articleId }) => {
   const [likeFalse, setLikeFalse] = useState("")
@@ -20,13 +21,9 @@ const Article = ({ title, description, url, date, tags, likes, articleId }) => {
   }, [user])
 
   const handleDelete = async () => {
-    user?.role === "admin"
-      ? await UseArticles().deleteArticle(title, user?.uid)
-      : null
-
-    if (user?.role === "admin") {
-      const result = await UseArticles().deleteArticle(title, user?.uid)
-      result && router.push("/")
+    if (articlePermission(user?.role)) {
+      await UseArticles().deleteArticle(articleId, user?.uid)
+      router.push("/")
     }
   }
 
@@ -99,7 +96,7 @@ const Article = ({ title, description, url, date, tags, likes, articleId }) => {
           <p className="my-6">{date}</p>
           <p className="text-xl ">{description}</p>
         </section>
-        {user?.role === "admin" && (
+        {articlePermission(user?.role) && (
           <div className="flex justify-center my-6">
             <button className="btn btn-error" onClick={handleDelete}>
               Eliminar Artículo
@@ -119,7 +116,7 @@ export async function getStaticPaths() {
   const paths = articles.map((article) => {
     // problem with modern browsers
     //let titleWithOutSpaces = article.title.replaceAll(" ", "-")
-    let titleWithOutSpaces = article.title.replace(/ /g, '-')
+    let titleWithOutSpaces = article.title.replace(/ /g, "-")
     return {
       params: { id: titleWithOutSpaces },
     }

@@ -27,9 +27,13 @@ export function useUsers() {
     return firestoreUsers
   }
 
-  const updateUserRole = async (user) => {
-    let { uid, role } = user
-    role === "admin" ? (role = "user") : (role = "admin")
+  // const updateUserRole = async (user) => {
+  //   let { uid, role } = user
+  //   role === "admin" ? (role = "user") : (role = "admin")
+  //   await firestoreService.updateUserRole(uid, role)
+  // }
+
+  const updateUserRole = async (uid, role) => {
     await firestoreService.updateUserRole(uid, role)
   }
 

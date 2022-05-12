@@ -6,6 +6,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import useAuth from "../application/useAuth"
 import { useThreats } from "../application/useThreats"
+import { forumPermission } from "../application/usePermissions"
 
 const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
   const [isAdmin, setIsAdmin] = useState(false)
@@ -14,7 +15,7 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
   const { deleteThreat } = useThreats()
 
   useEffect(() => {
-    if (userAuth.user?.role == "admin") {
+    if (forumPermission(userAuth.user?.role)) {
       setIsAdmin(true)
     }
   }, [userAuth])

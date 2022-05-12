@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 import useAuth from "../components/application/useAuth"
 import Link from "next/link"
 import AdminUsers from "../components/presentation/adminUsers"
+import { articlePermission } from "../components/application/usePermissions"
 
 export default function Perfil() {
   const { user, deleteUser } = useAuth()
@@ -12,7 +13,7 @@ export default function Perfil() {
   const router = useRouter()
 
   useEffect(() => {
-    if (user?.role === "admin") {
+    if (user?.role === "superAdmin") {
       getUsers().then((users) => {
         setUsers(users)
       })
@@ -54,9 +55,11 @@ export default function Perfil() {
             <h2 className="text-xl my-3">
               <span className="font-bold">Rol:</span> {user?.role}
             </h2>
-            <Link href="/nuevo-articulo">
-              <a className="btn btn-info my-3">Crear nuevo artículo</a>
-            </Link>
+            {articlePermission(user?.role) && (
+              <Link href="/nuevo-articulo">
+                <a className="btn btn-info my-3">Crear nuevo artículo</a>
+              </Link>
+            )}
             <label
               htmlFor="my-modal-4"
               className="btn btn-error modal-button my-3"
@@ -83,7 +86,7 @@ export default function Perfil() {
             Primero debes logearte
           </h1>
         )}
-        {user?.role === "admin" && <AdminUsers />}
+        {user?.role === "superAdmin" && <AdminUsers />}
       </main>
     </>
   )
