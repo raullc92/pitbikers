@@ -46,7 +46,7 @@ const Message = ({ user, text, date, color, tag, id, mainMessage }) => {
         {user}
         {isAdmin && !mainMessage && (
           <button
-            class="btn btn-circle btn-error btn-md mr-4"
+            className="btn btn-circle btn-error btn-md mr-4"
             onClick={handleClick}
           >
             <svg

@@ -29,16 +29,18 @@ const Foro = () => {
           <Searcher searchType="threat" />
         </section>
 
-        <section className="">
+        <section className="flex m-auto flex-col">
           <h2 className="text-6xl text-center font-bold my-6">Tags</h2>
-          {tags &&
-            tags.map((tag, id) => (
-              <TagCard
-                title={tag.name}
-                description={tag.description}
-                key={id}
-              />
-            ))}
+          <div className="m-auto">
+            {tags &&
+              tags.map((tag, id) => (
+                <TagCard
+                  title={tag.name}
+                  description={tag.description}
+                  key={`${id}-${tag}`}
+                />
+              ))}
+          </div>
         </section>
       </main>
     </>

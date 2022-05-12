@@ -42,7 +42,7 @@ export default function Login() {
         onSubmit={handleSubmit}
       >
         {({ errors, touched, isValidating, setFieldValue }) => (
-          <Form className="form-control md:w-[500px]">
+          <Form className="form-control md:w-[500px] my-44">
             <h1 className="text-center text-7xl mb-10">Nuevo Artículo</h1>
             <label className="input-group mb-7">
               <span className="md:w-36">Título</span>
@@ -81,9 +81,13 @@ export default function Login() {
                 </label>
               ))}
             </div>
-            <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+              className="my-6"
+            />
 
-            <button type="submit" className="btn btn-primary my-3">
+            <button type="submit" className="btn btn-primary my-6">
               Crear artículo
             </button>
             {Object.values(errors).map((error, index) => (

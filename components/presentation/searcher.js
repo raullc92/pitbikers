@@ -127,23 +127,25 @@ const Searcher = ({ searchType }) => {
         </section>
       )}
       {searchType === "threat" && searchedResults != null && (
-        <section>
+        <section className="flex m-auto flex-col">
           <h2 className="text-4xl text-center font-bold my-6">
             Hilos encontrados: {searchedResults.length}
           </h2>
-          {searchedResults != null &&
-            searchedResults.map((threat) => (
-              <ThreatCard
-                key={threat.id}
-                title={threat.title}
-                user={threat.user}
-                description={threat.description}
-                date={threat.date}
-                likes={threat.likes}
-                id={threat.id}
-                tag={threat.tag}
-              />
-            ))}
+          <div className="m-auto">
+            {searchedResults != null &&
+              searchedResults.map((threat) => (
+                <ThreatCard
+                  key={threat.id}
+                  title={threat.title}
+                  user={threat.user}
+                  description={threat.description}
+                  date={threat.date}
+                  likes={threat.likes}
+                  id={threat.id}
+                  tag={threat.tag}
+                />
+              ))}
+          </div>
         </section>
       )}
     </>

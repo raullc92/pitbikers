@@ -76,6 +76,7 @@ const Article = ({ title, description, url, date, tags, likes, articleId }) => {
               {tags &&
                 tags.map((tag, index) => (
                   <span
+                    key={`${index}-${tag}`}
                     className={`badge badge-${genericData.badgeStyles[index]} px-6 py-4 m-2 text-xl font-bold`}
                   >
                     {tag}
