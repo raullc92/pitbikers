@@ -51,7 +51,7 @@ const Threat = ({ results, tagName }) => {
 
   return (
     <div className="flex m-auto flex-col">
-      <h1 className="m-auto text-center mt-44 text-4xl uppercase font-bold">
+      <h1 className="m-auto text-center mt-44 text-3xl md:text-6xl uppercase font-bold">
         {title}
       </h1>
       <div className="m-auto">

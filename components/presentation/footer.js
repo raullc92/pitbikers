@@ -4,19 +4,21 @@ import { genericData } from "../application/genericData"
 
 const Footer = () => {
   return (
-    <footer className="flex justify-evenly items-center">
+    <footer className="flex justify-evenly items-center bg-primary py-3 mt-8">
       <ul className="flex flex-col">
+        <li className="font-bold">Páginas</li>
         <Link href={"/"}>
-          <a>Home</a>
+          <a className="mb-1 hover:text-base-100">Home</a>
         </Link>
         <Link href={"/foro"}>
-          <a>Foro</a>
+          <a className="mb-1 hover:text-base-100">Foro</a>
         </Link>
       </ul>
       <ul className="flex flex-col">
+        <li className="font-bold">Tags</li>
         {genericData.articleTags.map((tag) => (
           <Link href={`/foro/tag${tag}`} key={tag}>
-            <a>{tag}</a>
+            <a className="mb-1 hover:text-base-100">{tag}</a>
           </Link>
         ))}
       </ul>

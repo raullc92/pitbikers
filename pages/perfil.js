@@ -30,7 +30,7 @@ export default function Perfil() {
 
   return (
     <>
-      <main className="flex w-screen h-screen flex-col max-w-xs m-auto md:max-w-lg">
+      <main className="flex w-screen flex-col max-w-xs m-auto md:max-w-lg">
         {user ? (
           <>
             <h1 className="text-6xl  font-bold my-20 text-center">

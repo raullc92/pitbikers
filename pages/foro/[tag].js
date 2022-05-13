@@ -26,7 +26,9 @@ const Tag = ({ results, tag }) => {
 
   return (
     <div className="flex m-auto flex-col">
-      <h1 className="m-auto mt-44 text-6xl uppercase font-bold">{parseTag}</h1>
+      <h1 className="m-auto mt-44 text-4xl md:text-6xl uppercase font-bold">
+        {parseTag}
+      </h1>
       <div className="m-auto">
         <section>
           {results ? (
