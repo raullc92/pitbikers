@@ -21,7 +21,6 @@ const Article = ({
   const { user } = useAuth()
   const { increaseVote, decreaseVote } = UseArticles()
   const router = useRouter()
-  console.log(date)
 
   useEffect(() => {
     if (likes.users.includes(user?.uid)) {
@@ -126,8 +125,6 @@ export async function getStaticPaths() {
   const articles = await UseArticles().getArticles()
 
   const paths = articles.map((article) => {
-    // problem with modern browsers
-    //let titleWithOutSpaces = article.title.replaceAll(" ", "-")
     let titleWithOutSpaces = article.title.replace(/ /g, "-")
     return {
       params: { id: titleWithOutSpaces },
@@ -137,8 +134,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  //problem with modern browsers
-  //const title = params.id.replaceAll("-", " ")
   const title = params.id.replace(/-/g, " ")
   const article = await UseArticles().getArticleByName(title)
 

@@ -47,11 +47,9 @@ const Searcher = ({ searchType }) => {
     }
     let results = []
     if (searchType === "article") {
-      console.log("searching articles")
       results = await searchArticles(search, tagsChecked)
     }
     if (searchType === "threat") {
-      console.log("searching threats")
       results = await searchThreats(search, tagsChecked)
     }
     setSearchedResults(results)
@@ -59,7 +57,7 @@ const Searcher = ({ searchType }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="my-16">
         <div className="form-control flex max-w-xs m-auto md:max-w-xl">
           <input
             type="text"

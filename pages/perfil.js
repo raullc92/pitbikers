@@ -5,21 +5,22 @@ import useAuth from "../components/application/useAuth"
 import Link from "next/link"
 import AdminUsers from "../components/presentation/adminUsers"
 import { articlePermission } from "../components/application/usePermissions"
+import { timestampToDate } from "../components/application/parseDates"
 
 export default function Perfil() {
   const { user, deleteUser } = useAuth()
   const [users, setUsers] = useState([])
   const { getUsers } = useUsers()
   const router = useRouter()
+  console.log(user)
 
-  useEffect(() => {
-    if (user?.role === "superAdmin") {
-      getUsers().then((users) => {
-        setUsers(users)
-      })
-    }
-    console.log(users)
-  }, [user])
+  // useEffect(() => {
+  //   if (user?.role === "superAdmin") {
+  //     getUsers().then((users) => {
+  //       setUsers(users)
+  //     })
+  //   }
+  // }, [user])
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -47,14 +48,19 @@ export default function Perfil() {
               </div>
             </div>
             <h2 className="text-xl my-3">
-              <span className="font-bold">Nombre:</span> {user?.name}
+              <span className="font-bold mr-3">Nombre:</span> {user?.name}
             </h2>
             <h2 className="text-xl my-3">
-              <span className="font-bold">Email:</span> {user?.email}
+              <span className="font-bold mr-3">Email:</span> {user?.email}
             </h2>
             <h2 className="text-xl my-3">
-              <span className="font-bold">Rol:</span> {user?.role}
+              <span className="font-bold mr-3">Rol:</span> {user?.role}
             </h2>
+            <h3 className="text-xl my-3">
+              <span className="font-bold mr-3">Fecha de creación:</span>{" "}
+              {timestampToDate(user?.createdAt)}
+            </h3>
+
             {articlePermission(user?.role) && (
               <Link href="/nuevo-articulo">
                 <a className="btn btn-info my-3">Crear nuevo artículo</a>

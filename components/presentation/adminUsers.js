@@ -12,16 +12,6 @@ const AdminUsers = () => {
     })
   }, [])
 
-  // const handleChange = async (e) => {
-  //   let user = users.find((user) => user.uid === e.target.name)
-  //   console.log(user)
-  //   if (user) {
-  //     await updateUserRole(user)
-  //     const updatedUsers = await getUsers()
-  //     setUsers(updatedUsers)
-  //   }
-  // }
-
   const handleChange = async (e) => {
     const newRole = e.target.value
     const userUid = e.target.name
@@ -31,27 +21,6 @@ const AdminUsers = () => {
   }
 
   return (
-    // <section>
-    //   <h2 className="text-3xl text-center mt-12">Gestiona los usuarios</h2>
-    //   {users.map((user) => {
-    //     let check = ""
-    //     user.role === "admin" ? (check = "checked") : (check = "")
-    //     return (
-    //       <div key={user.uid}>
-    //         <label className="label cursor-pointer">
-    //           <span className="label-text text-xl">{user.name}</span>
-    //           <input
-    //             type="checkbox"
-    //             className="toggle toggle-primary"
-    //             checked={check}
-    //             onChange={handleChange}
-    //             name={user.uid}
-    //           />
-    //         </label>
-    //       </div>
-    //     )
-    //   })}
-    // </section>
     <section>
       <h2 className="text-3xl text-center mt-12">Gestiona los usuarios</h2>
       {users.map((user) => {
@@ -60,13 +29,13 @@ const AdminUsers = () => {
             <label className="label cursor-pointer">
               <span className="label-text text-xl">{user.name}</span>
               <select
-                className="select select-primary w-full max-w-xs"
+                className="select select-primary w-1/2"
                 onChange={handleChange}
                 name={user.uid}
                 value={user.role}
               >
                 {roles.map((role) => (
-                  <option>{role}</option>
+                  <option key={`${user.uid}-${role}`}>{role}</option>
                 ))}
               </select>
             </label>
