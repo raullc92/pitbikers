@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { formThreat } from "../../components/application/formValidation"
 import useAuth from "../../components/application/useAuth"
 import { useThreats } from "../../components/application/useThreats"
@@ -6,12 +6,22 @@ import { firestoreTagService } from "../../components/infrastructure/firestoreTa
 import ThreatCard from "../../components/presentation/threatCard"
 import { Field, Form, Formik } from "formik"
 import { useRouter } from "next/router"
+import {
+  orderThreatsByLikes,
+  orderThreatsNewest,
+  orderThreatsOldest,
+} from "../../components/application/orderFiles"
 
 const Tag = ({ results, tag }) => {
   const parseTag = tag.slice(3)
   const { user } = useAuth()
   const { newThreat } = useThreats()
   const router = useRouter()
+
+  const [threats, setThreats] = useState([])
+  useEffect(() => {
+    setThreats(results)
+  }, [])
 
   const threatSchema = formThreat
   const formValues = {
@@ -24,15 +34,42 @@ const Tag = ({ results, tag }) => {
     router.reload()
   }
 
+  const orderByLikes = async () => {
+    const orderedThreats = orderThreatsByLikes(threats)
+    setThreats([...orderedThreats])
+  }
+
+  const orderByNewest = () => {
+    const orderedThreats = orderThreatsNewest(threats)
+    setThreats([...orderedThreats])
+  }
+
+  const orderByOldest = () => {
+    const orderedThreats = orderThreatsOldest(threats)
+    setThreats([...orderedThreats])
+  }
+
   return (
     <div className="flex m-auto flex-col">
       <h1 className="m-auto mt-44 text-4xl md:text-6xl uppercase font-bold">
         {parseTag}
       </h1>
+      <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg">
+        <h3>Ordenar por:</h3>
+        <button className="btn btn-success" onClick={orderByLikes}>
+          Likes
+        </button>
+        <button className="btn btn-info" onClick={orderByNewest}>
+          Más recientes
+        </button>
+        <button className="btn btn-warning" onClick={orderByOldest}>
+          Más antiguos
+        </button>
+      </div>
       <div className="m-auto">
         <section>
-          {results ? (
-            results.map((threat) => (
+          {threats ? (
+            threats.map((threat) => (
               <ThreatCard
                 key={threat.id}
                 title={threat.title}
