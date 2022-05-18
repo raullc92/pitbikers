@@ -21,15 +21,17 @@ const AdminUsers = () => {
   }
 
   return (
-    <section>
-      <h2 className="text-3xl text-center mt-12">Gestiona los usuarios</h2>
+    <section className="mt-20 mb-32">
+      <h2 className="text-3xl text-center mt-12 uppercase mb-7">
+        Gestiona los usuarios
+      </h2>
       {users.map((user) => {
         return (
           <div key={user.uid}>
             <label className="label cursor-pointer">
               <span className="label-text text-xl">{user.name}</span>
               <select
-                className="select select-primary w-1/2"
+                className="select select-primary w-1/2 text-xl"
                 onChange={handleChange}
                 name={user.uid}
                 value={user.role}

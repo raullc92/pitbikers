@@ -28,14 +28,14 @@ export default function Login() {
   }
 
   return (
-    <main className="grid justify-center h-screen items-center max-w-xs m-auto ">
+    <main className="grid justify-center h-screen items-center max-w-xs m-auto mb-60">
       <Formik
         initialValues={formValues}
         validationSchema={articleSchema}
         onSubmit={handleSubmit}
       >
         {({ errors, touched, isValidating, setFieldValue }) => (
-          <Form className="form-control md:w-[500px] my-44">
+          <Form className="form-control md:w-[500px] my-44 text-xl">
             <h1 className="text-center text-7xl mb-10">Nuevo Artículo</h1>
             <label className="input-group mb-7">
               <span className="md:w-36">Título</span>
@@ -43,7 +43,7 @@ export default function Login() {
                 name="title"
                 type="text"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
             <label className="input-group mb-7">
@@ -53,7 +53,7 @@ export default function Login() {
                 as="textarea"
                 type="password"
                 placeholder=""
-                className="textarea textarea-primary w-full h-96"
+                className="textarea textarea-primary w-full h-96 text-xl"
               />
             </label>
             <div id="checkbox-group">Tags</div>
@@ -83,7 +83,7 @@ export default function Login() {
               className="my-6"
             />
 
-            <button type="submit" className="btn btn-primary my-6">
+            <button type="submit" className="btn btn-primary my-6 text-xl">
               Crear artículo
             </button>
             {Object.values(errors).map((error, index) => (

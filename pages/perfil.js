@@ -14,14 +14,6 @@ export default function Perfil() {
   const router = useRouter()
   console.log(user)
 
-  // useEffect(() => {
-  //   if (user?.role === "superAdmin") {
-  //     getUsers().then((users) => {
-  //       setUsers(users)
-  //     })
-  //   }
-  // }, [user])
-
   const handleClick = async (e) => {
     e.preventDefault()
     await deleteUser(user.id)
@@ -63,24 +55,29 @@ export default function Perfil() {
 
             {articlePermission(user?.role) && (
               <Link href="/nuevo-articulo">
-                <a className="btn btn-info my-3">Crear nuevo artículo</a>
+                <a className="btn btn-info my-3 text-xl">
+                  Crear nuevo artículo
+                </a>
               </Link>
             )}
             <label
               htmlFor="my-modal-4"
-              className="btn btn-error modal-button my-3"
+              className="btn btn-error modal-button my-3 text-xl"
             >
               Eliminar cuenta
             </label>
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             <label htmlFor="my-modal-4" className="modal cursor-pointer">
               <label className="modal-box relative">
-                <h3 className="text-lg font-bold">
+                <h3 className="text-xl font-bold">
                   Estás seguro que deseas eliminar tu cuenta?
                 </h3>
-                <p className="py-4">Esta acción es irreversible.</p>
+                <p className="py-4 text-lg">Esta acción es irreversible.</p>
                 <div className="modal-action">
-                  <button className="btn btn-error" onClick={handleClick}>
+                  <button
+                    className="btn btn-error text-xl"
+                    onClick={handleClick}
+                  >
                     Sí, deseo eliminar mi cuenta
                   </button>
                 </div>
