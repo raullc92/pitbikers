@@ -23,7 +23,8 @@ export function UseArticles() {
       tags: article.tags,
       url,
       imageName,
-      date: Timestamp.fromDate(new Date()),
+      date: new Date().toLocaleString(),
+      //date: Timestamp.fromDate(new Date()),
       likes: {
         count: 0,
         users: [],

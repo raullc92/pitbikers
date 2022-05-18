@@ -69,9 +69,10 @@ export const firestoreService = {
     const querySnapshot = await getDocs(collection(firestore, "articles"))
     const articles = []
     querySnapshot.forEach((doc) => {
-      let { date, ...data } = doc.data()
-      // articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
-      articles.push({ id: doc.id, date: timestampToDate(date), ...data })
+      // let { date, ...data } = doc.data()
+      // articles.push({ id: doc.id, date: timestampToDate(date), ...data })
+      let { ...data } = doc.data()
+      articles.push({ id: doc.id, ...data })
     })
     return articles
   },
@@ -85,9 +86,10 @@ export const firestoreService = {
     const querySnapshot = await getDocs(q)
     const articles = []
     querySnapshot.forEach((doc) => {
-      let { date, ...data } = doc.data()
-      // articles.push({ id: doc.id, date: date.toDate().toDateString(), ...data })
-      articles.push({ id: doc.id, date: timestampToDate(date), ...data })
+      // let { date, ...data } = doc.data()
+      // articles.push({ id: doc.id, date: timestampToDate(date), ...data })
+      let { ...data } = doc.data()
+      articles.push({ id: doc.id, ...data })
     })
     return articles[0]
   },

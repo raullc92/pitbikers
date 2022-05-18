@@ -23,8 +23,10 @@ export default function Login() {
   }
 
   const handleSubmit = async (values) => {
-    await createArticle(values, image)
-    router.push("/")
+    if (values && image) {
+      await createArticle(values, image)
+      router.push("/")
+    }
   }
 
   return (

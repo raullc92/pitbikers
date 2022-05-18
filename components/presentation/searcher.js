@@ -4,6 +4,11 @@ import { useSearch } from "../application/useSearch"
 import Link from "next/link"
 import { ArticleCard } from "./articleCard"
 import ThreatCard from "./threatCard"
+import {
+  orderThreatsByLikes,
+  orderThreatsNewest,
+  orderThreatsOldest,
+} from "../application/orderFiles"
 
 const Searcher = ({ searchType }) => {
   const [search, setSearch] = useState("")
@@ -55,6 +60,21 @@ const Searcher = ({ searchType }) => {
     setSearchedResults(results)
   }
 
+  const orderByLikes = () => {
+    const orderedThreats = orderThreatsByLikes(searchedResults)
+    setSearchedResults([...orderedThreats])
+  }
+
+  const orderByNewest = () => {
+    const orderedThreats = orderThreatsNewest(searchedResults)
+    setSearchedResults([...orderedThreats])
+  }
+
+  const orderByOldest = () => {
+    const orderedThreats = orderThreatsOldest(searchedResults)
+    setSearchedResults([...orderedThreats])
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit} className="my-16">
@@ -97,9 +117,23 @@ const Searcher = ({ searchType }) => {
       {searchType === "article" && (
         <section className="max-w-5xl m-auto mt-6">
           {searchedResults != null && (
-            <h2 className="text-4xl text-center font-bold my-6">
-              Artículos encontrados: {searchedResults.length}
-            </h2>
+            <>
+              <h2 className="text-4xl text-center font-bold my-6">
+                Artículos encontrados: {searchedResults.length}
+              </h2>
+              <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg text-xl">
+                <h3>Ordenar por:</h3>
+                <button className="btn btn-success" onClick={orderByLikes}>
+                  Likes
+                </button>
+                <button className="btn btn-info" onClick={orderByNewest}>
+                  Más recientes
+                </button>
+                <button className="btn btn-warning" onClick={orderByOldest}>
+                  Más antiguos
+                </button>
+              </div>
+            </>
           )}
           <div className="my-24 grid grid-cols-1  gap-20  md:grid-cols-2  justify-items-center">
             {searchedResults != null &&
@@ -129,6 +163,18 @@ const Searcher = ({ searchType }) => {
           <h2 className="text-4xl text-center font-bold my-6">
             Hilos encontrados: {searchedResults.length}
           </h2>
+          <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg text-xl">
+            <h3>Ordenar por:</h3>
+            <button className="btn btn-success" onClick={orderByLikes}>
+              Likes
+            </button>
+            <button className="btn btn-info" onClick={orderByNewest}>
+              Más recientes
+            </button>
+            <button className="btn btn-warning" onClick={orderByOldest}>
+              Más antiguos
+            </button>
+          </div>
           <div className="m-auto">
             {searchedResults != null &&
               searchedResults.map((threat) => (

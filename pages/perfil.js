@@ -12,7 +12,6 @@ export default function Perfil() {
   const [users, setUsers] = useState([])
   const { getUsers } = useUsers()
   const router = useRouter()
-  console.log(user)
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -30,9 +29,14 @@ export default function Perfil() {
             </h1>
             <div className="avatar placeholder flex">
               <div className="w-24 rounded-full bg-primary text-neutral-content items-center m-auto mb-3">
-                {user?.avatar ? (
+                {/* {user?.avatar ? (
                   <img src={user.avatar} />
                 ) : (
+                  <span className="text-3xl">
+                    {user?.name?.slice(0, 1).toUpperCase()}
+                  </span>
+                )} */}
+                {user && (
                   <span className="text-3xl">
                     {user?.name?.slice(0, 1).toUpperCase()}
                   </span>
