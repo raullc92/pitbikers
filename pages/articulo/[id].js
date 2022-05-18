@@ -110,8 +110,8 @@ const Article = ({
           </p>
         </section>
         {articlePermission(user?.role) && (
-          <div className="flex justify-center my-6">
-            <button className="btn btn-error" onClick={handleDelete}>
+          <div className="flex justify-center my-10">
+            <button className="btn btn-error text-xl" onClick={handleDelete}>
               Eliminar Artículo
             </button>
           </div>

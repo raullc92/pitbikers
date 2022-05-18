@@ -7,6 +7,7 @@ import { useThreats } from "../../../components/application/useThreats"
 import { firestoreTagService } from "../../../components/infrastructure/firestoreTagService"
 import Message from "../../../components/presentation/message"
 import Image from "next/image"
+import ComeBack from "../../../components/presentation/comeBack"
 
 const Threat = ({ results, tagName }) => {
   const { title, description, user, date, likes, id, messages } = results
@@ -62,6 +63,9 @@ const Threat = ({ results, tagName }) => {
             </button>
           </div>
         )}
+        <div>
+          <ComeBack />
+        </div>
         <section>
           <Message
             user={user}

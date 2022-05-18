@@ -11,6 +11,7 @@ import {
   orderThreatsNewest,
   orderThreatsOldest,
 } from "../../components/application/orderFiles"
+import ComeBack from "../../components/presentation/comeBack"
 
 const Tag = ({ results, tag }) => {
   const parseTag = tag.slice(3)
@@ -21,7 +22,7 @@ const Tag = ({ results, tag }) => {
   const [threats, setThreats] = useState([])
   useEffect(() => {
     setThreats(results)
-  }, [])
+  }, [results])
 
   const threatSchema = formThreat
   const formValues = {
@@ -54,6 +55,7 @@ const Tag = ({ results, tag }) => {
       <h1 className="m-auto mt-44 text-4xl md:text-6xl uppercase font-bold">
         {parseTag}
       </h1>
+      <ComeBack forum={true} />
       <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg text-xl">
         <h3>Ordenar por:</h3>
         <button className="btn btn-success" onClick={orderByLikes}>

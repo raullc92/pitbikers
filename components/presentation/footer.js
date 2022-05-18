@@ -17,7 +17,7 @@ const Footer = () => {
       <ul className="flex flex-col">
         <li className="font-bold">Tags</li>
         {genericData.articleTags.map((tag) => (
-          <Link href={`/foro/tag${tag}`} key={tag}>
+          <Link href={`/foro/tag${tag}`} key={`footer-${tag}`}>
             <a className="mb-1 hover:text-base-100">{tag}</a>
           </Link>
         ))}

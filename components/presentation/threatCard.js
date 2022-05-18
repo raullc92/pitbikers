@@ -33,7 +33,7 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
           {title}
           {isAdmin && (
             <button
-              className="btn btn-circle btn-error btn-md mr-4"
+              className="btn btn-circle btn-error btn-md mx-4"
               onClick={handleClick}
             >
               <svg
