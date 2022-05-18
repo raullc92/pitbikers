@@ -105,7 +105,9 @@ const Article = ({
             </div>
           </div>
           <p className="my-6">{date}</p>
-          <p className="text-xl ">{description}</p>
+          <p className="text-xl " style={{ whiteSpace: "pre-line" }}>
+            {description}
+          </p>
         </section>
         {articlePermission(user?.role) && (
           <div className="flex justify-center my-6">

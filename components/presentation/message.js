@@ -67,7 +67,9 @@ const Message = ({ user, text, date, color, tag, id, mainMessage }) => {
         )}
       </header>
       <div className="bg-white bg-opacity-5 py-2 px-4 text-xl rounded-b-lg">
-        <p className="mt-4">{text}</p>
+        <p className="mt-4" style={{ whiteSpace: "pre-line" }}>
+          {text}
+        </p>
         <div className="flex items-center justify-between mt-8">
           <p className="text-lg font-thin">{date}</p>
         </div>

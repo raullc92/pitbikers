@@ -37,7 +37,7 @@ export default function Home() {
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-md">
-              <h1 className="mb-5 text-7xl font-bold italic">
+              <h1 className="mb-5 text-7xl font-bold italic md:text-9xl">
                 PITBIKE<span className="font-thin">RS</span>
               </h1>
             </div>

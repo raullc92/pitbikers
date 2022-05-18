@@ -55,7 +55,7 @@ const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
         </header>
         <div className="bg-white bg-opacity-5 py-2 px-4 text-xl rounded-b-lg">
           <p className="text-2xl font-bold py-3 text-white">{user}</p>
-          <p>{description}</p>
+          <p style={{ whiteSpace: "pre-line" }}>{description}</p>
           <div className="flex items-center justify-between mt-8">
             <p className="text-lg font-thin">{date}</p>
             <div className="card-actions justify-end my-1 px-4 text-success font-bold text-2xl items-center">

@@ -17,7 +17,7 @@ const Foro = () => {
         <div className="hero-overlay bg-opacity-60"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-md md:max-w-xl">
-            <h1 className="mb-5 text-6xl tracking-wider font-bold italic md:text-7xl md:leading-[7rem]">
+            <h1 className="mb-5 text-6xl tracking-wider font-bold italic md:text-9xl md:leading-[7rem]">
               FORO
             </h1>
           </div>

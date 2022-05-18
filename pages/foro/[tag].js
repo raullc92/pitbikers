@@ -54,7 +54,7 @@ const Tag = ({ results, tag }) => {
       <h1 className="m-auto mt-44 text-4xl md:text-6xl uppercase font-bold">
         {parseTag}
       </h1>
-      <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg">
+      <div className="m-auto flex items-center gap-4 my-8 flex-wrap max-w-xs md:max-w-lg text-xl">
         <h3>Ordenar por:</h3>
         <button className="btn btn-success" onClick={orderByLikes}>
           Likes
@@ -92,14 +92,16 @@ const Tag = ({ results, tag }) => {
             onSubmit={handleSubmit}
           >
             {({ errors }) => (
-              <Form className="form-control md:max-w-4xl md:mx-10">
-                <h2 className="text-center text-xl mb-10">Nuevo Hilo</h2>
+              <Form className="form-control md:max-w-4xl md:mx-10 my-60">
+                <h2 className="text-center text-3xl mb-10 uppercase">
+                  Nuevo Hilo
+                </h2>
                 <label className="input-group mb-7">
                   <Field
                     name="title"
                     type="text"
                     placeholder="Escribe el título"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full text-xl"
                   />
                 </label>
                 <label className="input-group mb-7">
@@ -107,11 +109,11 @@ const Tag = ({ results, tag }) => {
                     name="description"
                     type="text"
                     placeholder="Escribe tu mensaje..."
-                    className="input input-bordered w-full h-56"
+                    className="input input-bordered w-full h-56 text-xl"
                     as="textarea"
                   />
                 </label>
-                <button type="submit" className="btn btn-primary my-3">
+                <button type="submit" className="btn btn-primary my-3 text-xl">
                   Enviar mensaje
                 </button>
                 {Object.values(errors).map((error, index) => (

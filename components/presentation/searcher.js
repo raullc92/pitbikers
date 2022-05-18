@@ -62,7 +62,7 @@ const Searcher = ({ searchType }) => {
           <input
             type="text"
             placeholder="Qué estás buscando?"
-            className="input w-full my-4 max-w-xs m-auto bg-slate-600 opacity-50 text-white focus:outline-0 md:max-w-xl"
+            className="input w-full my-4 max-w-xs m-auto bg-slate-600 opacity-50 text-white focus:outline-0 md:max-w-xl md:text-xl"
             value={search}
             onChange={handleChangeSearch}
           />
@@ -82,7 +82,7 @@ const Searcher = ({ searchType }) => {
                       className="checkbox checkbox-accent mr-2"
                       onChange={handleChangeChecks}
                     />
-                    <span className="label-text">{key}</span>
+                    <span className="label-text md:text-xl">{key}</span>
                   </label>
                 )
               })}
@@ -90,7 +90,7 @@ const Searcher = ({ searchType }) => {
           <input
             type="submit"
             value="Buscar"
-            className="btn btn-primary px-20 flex max-w-xs m-auto mt-6"
+            className="btn btn-primary px-20 flex max-w-xs m-auto mt-6 text-xl"
           />
         </div>
       </form>

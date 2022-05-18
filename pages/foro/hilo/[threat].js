@@ -94,18 +94,20 @@ const Threat = ({ results, tagName }) => {
             onSubmit={handleSubmit}
           >
             {({ errors }) => (
-              <Form className="form-control md:max-w-4xl md:mx-10">
-                <h2 className="text-center text-xl mb-10">Nuevo mensaje</h2>
+              <Form className="form-control md:max-w-4xl md:mx-10 my-60">
+                <h2 className="text-center text-3xl mb-10 uppercase">
+                  Nuevo mensaje
+                </h2>
                 <label className="input-group mb-7">
                   <Field
                     name="text"
                     type="text"
                     placeholder="Escribe tu mensaje..."
-                    className="input input-bordered w-full h-56"
+                    className="input input-bordered w-full h-56 text-xl"
                     as="textarea"
                   />
                 </label>
-                <button type="submit" className="btn btn-primary my-3">
+                <button type="submit" className="btn btn-primary my-3 text-xl">
                   Enviar mensaje
                 </button>
                 {Object.values(errors).map((error, index) => (
