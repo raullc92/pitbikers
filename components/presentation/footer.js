@@ -4,7 +4,7 @@ import { genericData } from "../application/genericData"
 
 const Footer = () => {
   return (
-    <footer className="flex justify-evenly items-center bg-primary py-3 mt-8">
+    <footer className="flex justify-evenly items-center bg-primary py-3 mt-8 text-xl">
       <ul className="flex flex-col">
         <li className="font-bold">Páginas</li>
         <Link href={"/"}>
