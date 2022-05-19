@@ -29,12 +29,11 @@ export default function Home() {
       <main className={styles.main}>
         <div
           className="hero min-h-screen"
-          //style="background-image: url(https://api.lorem.space/image/fashion?w=1000&h=800);"
           style={{
-            backgroundImage: `url(/vercel.svg)`,
+            backgroundImage: `url(/images/hero_color.webp)`,
           }}
         >
-          <div className="hero-overlay bg-opacity-60"></div>
+          <div className=" bg-opacity-60"></div>
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-md">
               <h1 className="mb-5 text-7xl font-bold italic md:text-9xl">

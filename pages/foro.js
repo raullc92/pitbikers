@@ -11,7 +11,7 @@ const Foro = () => {
       <header
         className="hero min-h-screen"
         style={{
-          backgroundImage: `url(/vercel.svg)`,
+          backgroundImage: `url(/images/hero_forum.webp)`,
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
