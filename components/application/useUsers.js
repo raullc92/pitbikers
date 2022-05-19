@@ -15,6 +15,8 @@ export function useUsers() {
       articleVotes: [],
     }
     await firestoreService.newUser(uid, newUser)
+    const resultUser = await firestoreService.getUser(newUser.uid)
+    return resultUser
   }
 
   const getUser = async (uid) => {

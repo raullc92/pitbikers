@@ -6,6 +6,11 @@ const UserDropDown = () => {
   const { logout, user } = useAuth()
   const firstLetter = user?.name?.charAt(0).toUpperCase() ?? ""
 
+  const handleClick = async () => {
+    await logout()
+    console.log(user)
+  }
+
   return (
     <div className="dropdown dropdown-end">
       <label
@@ -34,7 +39,7 @@ const UserDropDown = () => {
           <button
             type="button"
             className="justify-center text-xl"
-            onClick={logout}
+            onClick={handleClick}
           >
             Logout
           </button>

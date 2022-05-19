@@ -21,23 +21,44 @@ export function AuthProvider(props) {
   useEffect(() => {
     setLoading(true)
     const auth = getAuth()
-    if (user?.role == undefined) {
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const firestoreUser = await getUser(user.uid)
-          const updateUser = {
-            ...user,
-            ...firestoreUser,
-          }
-          setUser(updateUser)
-          setError({})
-        } else {
-          setUser(null)
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const firestoreUser = await getUser(user.uid)
+        const updateUser = {
+          ...user,
+          ...firestoreUser,
         }
-      })
-      setLoading(false)
-    }
-  }, [user])
+        setUser(updateUser)
+        setError({})
+      } else {
+        setUser(null)
+      }
+    })
+    setLoading(false)
+  }, [])
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   const auth = getAuth()
+  //   if (user?.role == undefined) {
+  //     onAuthStateChanged(auth, async (user) => {
+  //       if (user) {
+  //         getUser(user.uid).then((firestoreUser) => {
+  //           const updateUser = {
+  //             ...user,
+  //             ...firestoreUser,
+  //           }
+  //           setUser(updateUser)
+  //           setError({})
+  //         })
+  //       } else {
+  //         setUser(null)
+  //       }
+  //     })
+  //     setLoading(false)
+  //   }
+  // }, [])
 
   const loginWithGoogle = async () => {
     const { userUpdate, errorUpdate } = await AuthService.login()
@@ -70,10 +91,13 @@ export function AuthProvider(props) {
       email,
       password
     )
-    setUser(userUpdate ?? null)
+    //setUser(userUpdate ?? null)
     setError(errorUpdate ?? null)
     const { registerNewUser } = useUsers()
-    await registerNewUser(userUpdate, name)
+    const userFirestore = await registerNewUser(userUpdate, name)
+    const completeUser = { ...userUpdate, ...userFirestore }
+    console.log(completeUser)
+    setUser(completeUser)
     return errorUpdate
   }
 

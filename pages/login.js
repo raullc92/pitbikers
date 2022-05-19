@@ -46,21 +46,21 @@ export default function Login() {
           <Form className="form-control md:w-[500px]">
             <h1 className="text-center text-7xl mb-10">Login</h1>
             <label className="input-group mb-7">
-              <span className="md:w-36">Email</span>
+              <span className="md:w-36 text-xl">Email</span>
               <Field
                 name="email"
                 type="email"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
             <label className="input-group mb-7">
-              <span className="md:w-36">Contraseña</span>
+              <span className="md:w-36 text-xl">Contraseña</span>
               <Field
                 name="password"
                 type="password"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
             {firebaseError && (
@@ -106,7 +106,7 @@ export default function Login() {
                       d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                     />
                   </svg>
-                  <span>{error}</span>
+                  <span className=" text-xl">{error}</span>
                 </div>
               </div>
             ))}
