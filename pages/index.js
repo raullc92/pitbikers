@@ -7,11 +7,14 @@ import { ArticleCard } from "../components/presentation/articleCard"
 import Searcher from "../components/presentation/searcher"
 import { useState, useEffect } from "react"
 import { UseArticles } from "../components/application/useArticles"
+import { useUsers } from "../components/application/useUsers"
+import useAuth from "../components/application/useAuth"
 
 export default function Home() {
   const tags = ["mecanica", "mantenimiento", "circuito", "tag4", "tag5"]
   const { getArticles } = UseArticles()
   const [articles, setArticles] = useState([])
+  const { user } = useAuth()
   useEffect(() => {
     if (articles.length === 0) {
       getArticles().then((articles) => setArticles(articles))

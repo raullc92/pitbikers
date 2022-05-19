@@ -21,21 +21,23 @@ export function AuthProvider(props) {
   useEffect(() => {
     setLoading(true)
     const auth = getAuth()
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const firestoreUser = await getUser(user.uid)
-        const updateUser = {
-          ...user,
-          ...firestoreUser,
+    if (user?.role == undefined) {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const firestoreUser = await getUser(user.uid)
+          const updateUser = {
+            ...user,
+            ...firestoreUser,
+          }
+          setUser(updateUser)
+          setError({})
+        } else {
+          setUser(null)
         }
-        setUser(updateUser)
-        setError({})
-      } else {
-        setUser(null)
-      }
-    })
-    setLoading(false)
-  }, [])
+      })
+      setLoading(false)
+    }
+  }, [user])
 
   const loginWithGoogle = async () => {
     const { userUpdate, errorUpdate } = await AuthService.login()

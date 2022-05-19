@@ -37,39 +37,39 @@ export default function Signup() {
         {({ errors, touched, isValidating }) => (
           <Form className="form-control md:w-[500px]">
             <h1 className="text-center text-6xl mb-10">Crear cuenta</h1>
-            <label className="input-group mb-5">
-              <span className="md:w-36">Email</span>
+            <label className="input-group mb-5 text-xl">
+              <span className="md:w-36 ">Email</span>
               <Field
                 name="email"
                 type="email"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
-            <label className="input-group mb-5">
+            <label className="input-group mb-5 text-xl">
               <span className="md:w-36">Contraseña</span>
               <Field
                 name="password"
                 type="password"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
-            <label className="input-group mb-5">
+            <label className="input-group mb-5 text-xl">
               <span className="md:w-36">Nombre</span>
               <Field
                 name="name"
                 type="text"
                 placeholder=""
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-xl"
               />
             </label>
-            <button type="submit" className="btn btn-primary mb-5">
+            <button type="submit" className="btn btn-primary mb-5 text-xl">
               Registrarme
             </button>
             {Object.values(errors).map((error, index) => (
               <div
-                className="alert alert-warning shadow-lg mb-7 max-w-xs md:max-w-full"
+                className="alert alert-warning shadow-lg mb-7 max-w-xs md:max-w-full text-xl"
                 key={index}
               >
                 <div>
@@ -92,7 +92,7 @@ export default function Signup() {
             ))}
             <button
               type="button"
-              className="btn btn-info"
+              className="btn btn-info text-xl"
               onClick={loginWithGoogle}
             >
               Registrarme con Google
