@@ -2,7 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react"
 import { AuthService } from "../infrastructure/authService"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useRouter } from "next/router"
-import { UseUsers } from "./UseUsers"
+import { UseUsers } from "./useUsers"
 import { firestoreService } from "../infrastructure/firestoreService"
 
 const authContext = createContext()

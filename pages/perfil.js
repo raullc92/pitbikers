@@ -1,4 +1,4 @@
-import { UseUsers } from "../components/application/UseUsers"
+import { UseUsers } from "../components/application/useUsers"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import useAuth from "../components/application/useAuth"

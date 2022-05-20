@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { UseUsers } from "../application/UseUsers"
+import { UseUsers } from "../application/useUsers"
 
 const AdminUsers = () => {
   const { getUsers, updateUserRole } = UseUsers()

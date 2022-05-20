@@ -7,7 +7,7 @@ import { ArticleCard } from "../components/presentation/articleCard"
 import Searcher from "../components/presentation/searcher"
 import { useState, useEffect } from "react"
 import { UseArticles } from "../components/application/useArticles"
-import { UseUsers } from "../components/application/UseUsers"
+import { UseUsers } from "../components/application/useUsers"
 import useAuth from "../components/application/useAuth"
 
 export default function Home() {
