@@ -75,7 +75,6 @@ export function AuthProvider(props) {
     )
     setUser(userUpdate ?? null)
     setError(errorUpdate ?? null)
-    console.log({ userUpdate })
     return errorUpdate
   }
 
@@ -96,7 +95,6 @@ export function AuthProvider(props) {
     const { registerNewUser } = useUsers()
     const userFirestore = await registerNewUser(userUpdate, name)
     const completeUser = { ...userUpdate, ...userFirestore }
-    console.log(completeUser)
     setUser(completeUser)
     return errorUpdate
   }

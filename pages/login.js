@@ -27,7 +27,8 @@ export default function Login() {
     setFirebaseError(false)
     const { email, password } = values
     const { errorUpdate } = await loginWithEmailPassword(email, password)
-    errorUpdate ? setFirebaseError(true) : null
+    errorUpdate == null ? setFirebaseError(true) : null
+    console.log(firebaseError)
   }
 
   const handleClickGoogle = (e) => {
