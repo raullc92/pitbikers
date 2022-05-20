@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { formThreat } from "../../components/application/formValidation"
 import useAuth from "../../components/application/useAuth"
-import { UseThreats } from "../../components/application/UseThreats"
+import { UseThreats } from "../../components/application/useThreats"
 import { firestoreTagService } from "../../components/infrastructure/firestoreTagService"
 import ThreatCard from "../../components/presentation/threatCard"
 import { Field, Form, Formik } from "formik"

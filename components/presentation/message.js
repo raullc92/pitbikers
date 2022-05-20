@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { timestampToDate } from "../application/parseDates"
 import useAuth from "../application/useAuth"
-import { UseThreats } from "../application/UseThreats"
+import { UseThreats } from "../application/useThreats"
 import { useRouter } from "next/router"
 import { forumPermission } from "../application/usePermissions"
 

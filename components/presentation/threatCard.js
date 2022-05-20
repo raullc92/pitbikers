@@ -5,7 +5,7 @@ import { timestampToDate } from "../application/parseDates"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import useAuth from "../application/useAuth"
-import { UseThreats } from "../application/UseThreats"
+import { UseThreats } from "../application/useThreats"
 import { forumPermission } from "../application/usePermissions"
 
 const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {

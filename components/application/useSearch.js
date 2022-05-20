@@ -1,5 +1,5 @@
 import { UseArticles } from "./useArticles"
-import { UseThreats } from "./UseThreats"
+import { UseThreats } from "./useThreats"
 
 export function useSearch() {
   const { getArticles } = UseArticles()
