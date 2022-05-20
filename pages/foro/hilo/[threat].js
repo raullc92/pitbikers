@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { formMessage } from "../../../components/application/formValidation"
 import useAuth from "../../../components/application/useAuth"
-import { useThreats } from "../../../components/application/useThreats"
+import { UseThreats } from "../../../components/application/UseThreats"
 import { firestoreTagService } from "../../../components/infrastructure/firestoreTagService"
 import Message from "../../../components/presentation/message"
 import Image from "next/image"
@@ -14,9 +14,9 @@ const Threat = ({ results, tagName }) => {
   const [likeFalse, setLikeFalse] = useState("")
 
   const userAuth = useAuth()
-  const { newAnswer } = useThreats()
+  const { newAnswer } = UseThreats()
   const router = useRouter()
-  const { increaseVote, decreaseVote } = useThreats()
+  const { increaseVote, decreaseVote } = UseThreats()
 
   const messageSchema = formMessage
   const formValues = {
@@ -149,7 +149,7 @@ const Threat = ({ results, tagName }) => {
 export async function getServerSideProps({ params }) {
   const query = params.threat
   const [tag, id] = query.split("-")
-  const { getThreatById } = useThreats()
+  const { getThreatById } = UseThreats()
   const threats = await getThreatById(tag, id)
   const results = JSON.parse(JSON.stringify(threats))
   const tagName = tag

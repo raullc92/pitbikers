@@ -2,7 +2,7 @@ import { createContext, useState, useContext, useEffect } from "react"
 import { AuthService } from "../infrastructure/authService"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { useRouter } from "next/router"
-import { useUsers } from "./useUsers"
+import { UseUsers } from "./UseUsers"
 import { firestoreService } from "../infrastructure/firestoreService"
 
 const authContext = createContext()
@@ -16,7 +16,7 @@ export function AuthProvider(props) {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const { registerNewUser, getUser } = useUsers()
+  const { registerNewUser, getUser } = UseUsers()
 
   useEffect(() => {
     setLoading(true)
@@ -64,7 +64,7 @@ export function AuthProvider(props) {
     const { userUpdate, errorUpdate } = await AuthService.login()
     setUser(userUpdate ?? null)
     setError(errorUpdate ?? null)
-    const { registerNewUser } = useUsers()
+    const { registerNewUser } = UseUsers()
     registerNewUser(userUpdate)
   }
 
@@ -92,7 +92,7 @@ export function AuthProvider(props) {
     )
     //setUser(userUpdate ?? null)
     setError(errorUpdate ?? null)
-    const { registerNewUser } = useUsers()
+    const { registerNewUser } = UseUsers()
     const userFirestore = await registerNewUser(userUpdate, name)
     const completeUser = { ...userUpdate, ...userFirestore }
     setUser(completeUser)

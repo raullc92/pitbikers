@@ -1,7 +1,7 @@
 import { Timestamp } from "firebase/firestore"
 import { firestoreTagService } from "../infrastructure/firestoreTagService"
 
-export function useThreats() {
+export function UseThreats() {
   const getThreats = async (tag) => {
     const threats = await firestoreTagService().getThreats(tag)
     return threats

@@ -1,9 +1,9 @@
 import { UseArticles } from "./useArticles"
-import { useThreats } from "./useThreats"
+import { UseThreats } from "./UseThreats"
 
 export function useSearch() {
   const { getArticles } = UseArticles()
-  const { getThreats } = useThreats()
+  const { getThreats } = UseThreats()
 
   const searchArticles = async (text, tags) => {
     let articles = await getArticles()

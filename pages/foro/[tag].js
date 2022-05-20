@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { formThreat } from "../../components/application/formValidation"
 import useAuth from "../../components/application/useAuth"
-import { useThreats } from "../../components/application/useThreats"
+import { UseThreats } from "../../components/application/UseThreats"
 import { firestoreTagService } from "../../components/infrastructure/firestoreTagService"
 import ThreatCard from "../../components/presentation/threatCard"
 import { Field, Form, Formik } from "formik"
@@ -16,7 +16,7 @@ import ComeBack from "../../components/presentation/comeBack"
 const Tag = ({ results, tag }) => {
   const parseTag = tag.slice(3)
   const { user } = useAuth()
-  const { newThreat } = useThreats()
+  const { newThreat } = UseThreats()
   const router = useRouter()
 
   const [threats, setThreats] = useState([])
@@ -152,7 +152,7 @@ const Tag = ({ results, tag }) => {
 
 export async function getServerSideProps({ params }) {
   const tag = params.tag
-  const { getThreats } = useThreats()
+  const { getThreats } = UseThreats()
   const threats = await getThreats(tag)
   const results = JSON.parse(JSON.stringify(threats))
   return { props: { results, tag } }

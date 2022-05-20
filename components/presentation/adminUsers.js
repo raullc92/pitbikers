@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { useUsers } from "../application/useUsers"
+import { UseUsers } from "../application/UseUsers"
 
 const AdminUsers = () => {
-  const { getUsers, updateUserRole } = useUsers()
+  const { getUsers, updateUserRole } = UseUsers()
   const [users, setUsers] = useState([])
   const roles = ["adminPost", "adminForum", "superAdmin", "user"]
 

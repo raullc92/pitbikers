@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { timestampToDate } from "../application/parseDates"
 import useAuth from "../application/useAuth"
-import { useThreats } from "../application/useThreats"
+import { UseThreats } from "../application/UseThreats"
 import { useRouter } from "next/router"
 import { forumPermission } from "../application/usePermissions"
 
@@ -12,7 +12,7 @@ const Message = ({ user, text, date, color, tag, id, mainMessage }) => {
     opacity: "bg-opacity-25",
   })
   const userAuth = useAuth()
-  const { deleteMessage } = useThreats()
+  const { deleteMessage } = UseThreats()
   const router = useRouter()
 
   useEffect(() => {

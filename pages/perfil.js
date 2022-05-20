@@ -1,4 +1,4 @@
-import { useUsers } from "../components/application/useUsers"
+import { UseUsers } from "../components/application/UseUsers"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import useAuth from "../components/application/useAuth"
@@ -10,7 +10,7 @@ import { timestampToDate } from "../components/application/parseDates"
 export default function Perfil() {
   const { user, deleteUser } = useAuth()
   const [users, setUsers] = useState([])
-  const { getUsers } = useUsers()
+  const { getUsers } = UseUsers()
   const router = useRouter()
 
   const handleClick = async (e) => {

@@ -5,14 +5,14 @@ import { timestampToDate } from "../application/parseDates"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import useAuth from "../application/useAuth"
-import { useThreats } from "../application/useThreats"
+import { UseThreats } from "../application/UseThreats"
 import { forumPermission } from "../application/usePermissions"
 
 const ThreatCard = ({ title, description, user, date, likes, id, tag }) => {
   const [isAdmin, setIsAdmin] = useState(false)
   const userAuth = useAuth()
   const router = useRouter()
-  const { deleteThreat } = useThreats()
+  const { deleteThreat } = UseThreats()
 
   useEffect(() => {
     if (forumPermission(userAuth.user?.role)) {
