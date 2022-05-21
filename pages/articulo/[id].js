@@ -132,7 +132,7 @@ export async function getStaticPaths() {
       params: { id: titleWithOutSpaces },
     }
   })
-  return { paths, fallback: blocking }
+  return { paths, fallback: "blocking" }
 }
 
 export async function getStaticProps({ params }) {
