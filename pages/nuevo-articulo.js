@@ -30,7 +30,7 @@ export default function Login() {
   }
 
   return (
-    <main className="grid justify-center h-screen items-center max-w-xs m-auto mb-60">
+    <main className="grid justify-center items-center max-w-xs m-auto mb-60">
       <Formik
         initialValues={formValues}
         validationSchema={articleSchema}
